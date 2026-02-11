@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Love ❤️</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
+      text-align: center;
+    }
+    .card {
+      background: rgba(0,0,0,0.4);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 500px;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    #yesBtn { background: #4CAF50; color: white; }
+    #noBtn { background: #f44336; color: white; position: absolute; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>My Lovely Wife ❤️</h1>
+  <p>
+    You are my forever, my always, my everything.<br><br>
+    Will you walk with me for the rest of our lives? 💍
+  </p>
+
+  <button id="yesBtn" onclick="openGallery()">YES 💖</button>
+  <button id="noBtn" onclick="moveNo()">NO 😜</button>
+</div>
+
+<script>
+  function moveNo() {
+    const btn = document.getElementById("noBtn");
+    btn.style.left = Math.random() * 80 + "%";
+    btn.style.top = Math.random() * 80 + "%";
+  }
+
+  function openGallery() {
+    window.location.href = "gallery.html";
+  }
+</script>
+
+</body>
+</html>
