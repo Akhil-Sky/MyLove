@@ -1,37 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>My Love ❤️</title>
-  <style>
-    body {
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: #fff;
-      text-align: center;
-    }
-    .card {
-      background: rgba(0,0,0,0.4);
-      padding: 40px;
-      border-radius: 20px;
-      max-width: 500px;
-    }
-    button {
-      padding: 12px 25px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-    }
-    #yesBtn { background: #4CAF50; color: white; }
-    #noBtn { background: #f44336; color: white; position: absolute; }
-  </style>
+<meta charset="UTF-8">
+<title>My Love ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* ===== Body & Background ===== */
+body {
+  background: url('images/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ===== Card ===== */
+.card {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px 20px;
+  border-radius: 20px;
+  max-width: 90%;
+  width: 400px;
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+}
+
+/* YES Button */
+#yesBtn {
+  background: linear-gradient(45deg, #ff758c, #ff7eb3);
+}
+#yesBtn:hover {
+  transform: scale(1.1) rotate(-2deg);
+  box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+}
+
+/* NO Button */
+#noBtn {
+  background: linear-gradient(45deg, #f44336, #ff6b81);
+  position: fixed;
+}
+#noBtn:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 8px 25px rgba(255, 69, 58, 0.6);
+}
+
+/* Small NO popup */
+.no-popup {
+  position: fixed;
+  background: rgba(255, 105, 180, 0.95);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 25px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  z-index: 10000;
+  pointer-events: none;
+  animation: fadeOut 5s forwards;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; transform: translateY(-10px); }
+  100% { opacity: 0; transform: translateY(-25px); }
+}
+
+/* Celebration Hearts & Balloons */
+.celebration-heart, .balloon {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.celebration-heart {
+  font-size: 20px;
+  color: pink;
+  animation: floatUp 3s linear forwards;
+}
+
+.balloon {
+  width: 30px;
+  height: 40px;
+  border-radius: 50% 50% 50% 50%;
+  background: red;
+  animation: rise 4s linear forwards;
+  opacity: 0.9;
+}
+
+/* Hearts animation */
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: translateY(-100px) scale(1.5); opacity: 0.8; }
+  100% { transform: translateY(-200px) scale(0.5); opacity: 0; }
+}
+
+/* Balloons rising */
+@keyframes rise {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-100vh) scale(1); }
+}
+
+/* Overlay */
+.celebration-overlay {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(255, 182, 193, 0.2);
+  z-index: 9998;
+  pointer-events: none;
+}
+
+/* Firework sparkles */
+.firework {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background: yellow;
+  border-radius: 50%;
+  z-index: 10001;
+  animation: spark 1s forwards;
+}
+
+@keyframes spark {
+  0% { transform: scale(1); opacity:1; }
+  50% { transform: scale(2); opacity:0.8; }
+  100% { transform: scale(0); opacity:0; }
+}
+
+/* Responsive Card & Buttons */
+@media (max-width: 500px) {
+  .card { width: 90%; padding: 20px; }
+  button { font-size: 1rem; padding: 10px 20px; }
+}
+</style>
 </head>
 <body>
 
@@ -42,20 +166,101 @@
     Will you walk with me for the rest of our lives? 💍
   </p>
 
-  <button id="yesBtn" onclick="openGallery()">YES 💖</button>
-  <button id="noBtn" onclick="moveNo()">NO 😜</button>
+  <button id="yesBtn">YES 💖</button>
+  <button id="noBtn">NO 😜</button>
 </div>
 
 <script>
-  function moveNo() {
-    const btn = document.getElementById("noBtn");
-    btn.style.left = Math.random() * 80 + "%";
-    btn.style.top = Math.random() * 80 + "%";
+/* ===== NO Button Messages + Movement ===== */
+const noMessages = [
+  "Nahi jaanu 😘",
+  "Nooo, I love you too much naa Jaanu 💖",
+  "Try again 😏",
+  "You can’t say no ❤️",
+  "Nooo ye nhi My Love 😍",
+  "Impossible 😎",
+  "Say YES naaa 💕",
+  "Nooo..? Really? 😅",
+  "Aww… Nahi ji ye nhi click krna tha ❤️",
+  "You know you want to 😘"
+];
+
+function moveNo() {
+  const btn = document.getElementById("noBtn");
+  const buttonWidth = btn.offsetWidth;
+  const buttonHeight = btn.offsetHeight;
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+
+  // Move button anywhere on screen
+  const randomX = Math.random() * (screenWidth - buttonWidth);
+  const randomY = Math.random() * (screenHeight - buttonHeight);
+
+  btn.style.left = randomX + "px";
+  btn.style.top = randomY + "px";
+
+  // Show popup message
+  const message = noMessages[Math.floor(Math.random() * noMessages.length)];
+  const popup = document.createElement("div");
+  popup.className = "no-popup";
+  popup.innerText = message;
+
+  // Position popup above button
+  popup.style.left = randomX + buttonWidth / 2 + "px";
+  popup.style.top = randomY - 50 + "px";
+  popup.style.transform = "translateX(-50%)";
+
+  document.body.appendChild(popup);
+
+  // Remove popup after 5 seconds
+  setTimeout(() => popup.remove(), 5000);
+}
+
+document.getElementById("noBtn").addEventListener("click", moveNo);
+
+/* ===== YES Button Celebration ===== */
+function celebrateLove() {
+  const overlay = document.createElement("div");
+  overlay.className = "celebration-overlay";
+  document.body.appendChild(overlay);
+
+  // Hearts
+  for (let i = 0; i < 40; i++) {
+    const heart = document.createElement("div");
+    heart.className = "celebration-heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (20 + Math.random()*25) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 3000);
   }
 
-  function openGallery() {
-    window.location.href = "gallery.html";
+  // Balloons
+  const colors = ["red","blue","yellow","pink","orange","purple"];
+  for (let i = 0; i < 20; i++) {
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.style.background = colors[Math.floor(Math.random()*colors.length)];
+    balloon.style.left = Math.random()*window.innerWidth + "px";
+    document.body.appendChild(balloon);
+    setTimeout(() => balloon.remove(), 4000);
   }
+
+  // Fireworks
+  for (let i = 0; i < 30; i++) {
+    const spark = document.createElement("div");
+    spark.className = "firework";
+    spark.style.left = Math.random()*window.innerWidth + "px";
+    spark.style.top = Math.random()*window.innerHeight + "px";
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 1000);
+  }
+
+  // Redirect after 3s
+  setTimeout(() => window.location.href = "gallery.html", 3000);
+}
+
+document.getElementById("yesBtn").addEventListener("click", celebrateLove);
 </script>
 
 </body>
